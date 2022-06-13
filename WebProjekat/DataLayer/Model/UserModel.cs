@@ -20,7 +20,10 @@ namespace DataLayer.Model
             Slika = slika;
             Porudzbine = new List<OrderModel>();
         }
-
+        public UserModel() 
+        {
+            
+        }
         public long Id { get; set; }
         public string KorisnickoIme { get; set; }
         public string  Lozinka { get; set; }

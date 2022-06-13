@@ -4,25 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.Model
+namespace ServiceLayer.Dto
 {
-    public class Admin
+   public class AdminDto
     {
-        public Admin(long id, string korisnickoIme, string lozinka, string punoIme, DateTime datumRodjenja, string adresa, byte[] slika)
+        public AdminDto(long id, string korisnickoIme,string punoIme, DateTime datumRodjenja, string adresa, byte[] slika)
         {
             Id = id;
             KorisnickoIme = korisnickoIme;
-            Lozinka = lozinka;
             PunoIme = punoIme;
             DatumRodjenja = datumRodjenja;
             Adresa = adresa;
             Slika = slika;
         }
 
-        public Admin() { }
         public long Id { get; set; }
         public string KorisnickoIme { get; set; }
-        public string Lozinka { get; set; }
         public string PunoIme { get; set; }
         public DateTime DatumRodjenja { get; set; }
         public string Adresa { get; set; }

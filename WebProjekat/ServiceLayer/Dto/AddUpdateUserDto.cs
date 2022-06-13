@@ -1,14 +1,15 @@
-﻿using System;
+﻿using DataLayer.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.Model
+namespace ServiceLayer.Dto
 {
-    public class Admin
+   public class AddUpdateUserDto
     {
-        public Admin(long id, string korisnickoIme, string lozinka, string punoIme, DateTime datumRodjenja, string adresa, byte[] slika)
+        public AddUpdateUserDto(long id, string korisnickoIme, string lozinka, string punoIme, DateTime datumRodjenja, string adresa, byte[] slika)
         {
             Id = id;
             KorisnickoIme = korisnickoIme;
@@ -17,9 +18,12 @@ namespace DataLayer.Model
             DatumRodjenja = datumRodjenja;
             Adresa = adresa;
             Slika = slika;
+            Porudzbine = new List<OrderModel>();
         }
+        public AddUpdateUserDto()
+        {
 
-        public Admin() { }
+        }
         public long Id { get; set; }
         public string KorisnickoIme { get; set; }
         public string Lozinka { get; set; }
@@ -27,5 +31,6 @@ namespace DataLayer.Model
         public DateTime DatumRodjenja { get; set; }
         public string Adresa { get; set; }
         public byte[] Slika { get; set; }
+        public List<OrderModel> Porudzbine { get; set; }
     }
 }

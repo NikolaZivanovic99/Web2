@@ -1,31 +1,29 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer;
-using ServiceLayer.Services;
 using ServiceLayer.Dto;
+using ServiceLayer.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace WebProjekat.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class AdminController : ControllerBase
     {
-        private readonly UserService _userService;
+        private readonly AdminService _adminService;
 
-        public UserController(UserService userService) 
+        public AdminController(AdminService adminService)
         {
-            _userService = userService;
+            _adminService = adminService;
         }
-        [Authorize]
+        
         [HttpGet]
-        public IActionResult GetAllUsers()
+        public IActionResult GetAllAdmins()
         {
-            return Ok(_userService.GetAllUsers());
+            return Ok(_adminService.GetAdmins());
         }
 
         [HttpGet("{id}")]
@@ -33,54 +31,54 @@ namespace WebProjekat.Controllers
         {
             try
             {
-                return Ok(_userService.GetById(id));
+                return Ok(_adminService.GetById(id));
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 return NotFound();
             }
         }
 
         [HttpPost]
-        public IActionResult AddUser([FromBody] AddUpdateUserDto userDto)
+        public IActionResult AddAdmin([FromBody] AddUpdateAdminDto adminDto)
         {
-            try
-            {
-                return Created("/api/User",_userService.AddUser(userDto));
-            }
-            catch (Exception) 
-            {
-                return BadRequest();
-            }
+            //try
+            //{
+                return Created("/api/User", _adminService.AddAdmin(adminDto));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return BadRequest();
+        //    }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser(int id) 
+        public IActionResult DeleteAdmin(int id)
         {
             try
             {
-                _userService.DeleteUser(id);
+                _adminService.DeleteAdmin(id);
                 return Ok();
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 return NotFound();
             }
-           
+
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpadateUser(long id, [FromBody] AddUpdateUserDto userDto)
+        public IActionResult UpadateAdmin(long id, [FromBody] AddUpdateAdminDto adminDto)
         {
             try
             {
-                return Created("/api/User",_userService.UpadateUser(id, userDto));
+                return Created("/api/User", _adminService.UpdateAdmin(id, adminDto));
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 return BadRequest();
             }
-           
+
         }
 
         [HttpPost("login")]
@@ -88,14 +86,14 @@ namespace WebProjekat.Controllers
         {
             try
             {
-                LoginResponse loginResponse = _userService.Login(login);
+                LoginResponse loginResponse = _adminService.Login(login);
                 return Created("/api/User/login", loginResponse);
             }
             catch (Exception)
             {
                 return NotFound();
             }
-            
+
 
         }
     }
